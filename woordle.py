@@ -2,15 +2,18 @@ import tkinter as tk
 import random
 
 def getWord():
-    fileDict = {1 : "wordle-La.txt",
-                2 : "wordle-Ta.txt",
-                3: "words.txt"}
+    fileDict = {1 : "Wordle-Clone/wordle-La.txt",
+                2 : "Wordle-Clone/wordle-Ta.txt",
+                3: "Wordle-Clone/words.txt"}
     file = fileDict[random.randint(1,3)]
     
     with open(file, 'r') as fileRead:
         fileContents = fileRead.read()
-    words = fileContents.split("\n")
-    roundWord = words[random.randint(0,len(words))]
+    listOfWords = fileContents.split("\n")
+    roundWord = ""
+    while (len(roundWord) != 5):
+        roundWord = listOfWords[random.randint(0,(len(listOfWords)-1))]
+    print(roundWord)
     return roundWord
 
 def makeBoard(word):
@@ -66,18 +69,18 @@ def correct(guess, actual):
 
 word1 = getWord()       
 word2 = getWord()
-print(word1)
-print(word2)
-print(letterTracker(word1, word2))
-print(correct(word1, word2))
-print(similarLetters(word1, word2))
+##print(word1)
+#print(word2)
+#print(letterTracker(word1, word2))
+#print(correct(word1, word2))
+#print(similarLetters(word1, word2))
             
 
 
     
 
 
-window = tk.Tk()
-window.title("Hello World")
+#window = tk.Tk()
+#window.title("Hello World")
 
 ##window.mainloop()
