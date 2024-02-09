@@ -2,8 +2,13 @@ import tkinter as tk
 import random
 
 def getWord():
-    with open("words.txt", 'r') as file:
-        fileContents = file.read()
+    fileDict = {1 : "wordle-La.txt",
+                2 : "wordle-Ta.txt",
+                3: "words.txt"}
+    file = fileDict[random.randint(1,3)]
+    
+    with open(file, 'r') as fileRead:
+        fileContents = fileRead.read()
     words = fileContents.split("\n")
     roundWord = words[random.randint(0,len(words))]
     return roundWord
