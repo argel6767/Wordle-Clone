@@ -42,13 +42,15 @@ def wordToDict(word):
     
     return charIndexDict
     
-def contains(guess, actual): 
-    guess =[char for char in guess]
-    containedLetters = []
-    for i in enumerate(actual):
-        if guess[i] in actual:
-            containedLetters.append(guess[i])
-    return containedLetters
+def contains(guess, actualDict): 
+    correctchars = []
+    for character in guess:
+        if character in actualDict.values():
+            correctchars.append(character)
+    return correctchars
+        
+    
+    
 
 def similarLetters(guess, actual):
     guess = sorted([char for char in guess])
@@ -73,7 +75,8 @@ def correct(guess, actual):
         return "wrong"
 
 
-print(wordToDict("apple"))
+dict = wordToDict("apple")
+contains("alien", dict)
 ##print(word1)
 #print(word2)
 #print(letterTracker(word1, word2))
