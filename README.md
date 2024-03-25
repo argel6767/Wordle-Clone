@@ -1,2 +1,2 @@
 # Wordle-Clone
-A simulated wordle clone
+A simulated wordle clone using python.
