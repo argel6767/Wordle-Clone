@@ -32,19 +32,15 @@ def makeBoard(word):
         emptyList.append("_")
     return emptyList
 
-
-'''def letterTracker(word, desiredWord):
-    wordArray = [char for char in word]
-    desiredArray = [char for char in desiredWord]
-    correctLetters = {}
-    for i in range(len(desiredArray)):
-        correctLetters.update({desiredArray[i]:[]})
-    for i in range(len(wordArray)):
-        for k in range(len(desiredArray)):
-            if (wordArray[i] == desiredArray[k]):
-                if i not in correctLetters[wordArray[i]]:
-                    correctLetters[wordArray[i]].append(i)
-    return correctLetters'''
+def wordToDict(word):
+    listOfChars = word.split()
+    
+    charIndexDict = {}
+    
+    for index, char in enumerate(word):
+        charIndexDict[index] = char
+    
+    return charIndexDict
     
 def contains(guess, actual): 
     guess =[char for char in guess]
@@ -76,8 +72,8 @@ def correct(guess, actual):
     else:
         return "wrong"
 
-word1 = getWord()       
-word2 = getWord()
+
+print(wordToDict("apple"))
 ##print(word1)
 #print(word2)
 #print(letterTracker(word1, word2))
