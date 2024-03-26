@@ -44,9 +44,17 @@ def wordToDict(word):
     
 def contains(guess, actualDict): 
     correctchars = []
-    for character in guess:
-        if character in actualDict.values():
-            correctchars.append(character)
+    charsInRightSpot = []
+    charsInWord = []
+    
+    for index , character in enumerate(guess):
+        if character in actualDict.values() and actualDict.get(index) == character:
+            charsInRightSpot.append(character)
+        elif character in actualDict.values():
+            charsInWord.append(character)
+    correctchars.append(charsInRightSpot)
+    correctchars.append(charsInWord)
+    
     return correctchars
         
     
