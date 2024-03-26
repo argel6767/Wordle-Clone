@@ -4,10 +4,9 @@ import random
 def getWord():
     #put three possible files than be read in a dict
     fileDict = {1 : "Wordle-Clone/wordle-La.txt",
-                2 : "Wordle-Clone/wordle-Ta.txt",
-                3: "Wordle-Clone/words.txt"}
+                2 : "Wordle-Clone/wordle-Ta.txt"}
     #file chosen by random
-    file = fileDict[random.randint(1,3)]
+    file = fileDict[random.randint(1,2)]
     
     #open now selected file
     with open(file, 'r') as fileRead:
@@ -20,9 +19,7 @@ def getWord():
     roundWord = ""
     
     #makes sure the chosen word is exactly 5 letters long
-    while (len(roundWord) != 5):
-        roundWord = listOfWords[random.randint(0,(len(listOfWords)-1))]
-    print(roundWord)
+    roundWord = listOfWords[random.randint(0,(len(listOfWords)-1))]
     return roundWord
 
 def makeBoard(word):
