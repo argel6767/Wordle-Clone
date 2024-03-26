@@ -51,19 +51,6 @@ def contains(guess, actualDict):
         
     
     
-
-def similarLetters(guess, actual):
-    guess = sorted([char for char in guess])
-    actual = sorted([char for char in actual])
-    count = 0
-    for i in range(len(actual)):
-        if (i == len(guess) -1):
-            break;
-        if (guess[i] == actual[i]):
-            count+=1
-            
-    return count/len(actual)
-    
     
 
 def correct(guess, actual):
