@@ -1,37 +1,23 @@
-import tkinter as tk
+
 import random
 
 def getWord():
-    #put three possible files than be read in a dict
-    fileDict = {1 : "Wordle-Clone/wordle-La.txt",
-                2 : "Wordle-Clone/wordle-Ta.txt"}
-    #file chosen by random
+    fileDict = {1 : "wordle-La.txt",
+                2 : "wordle-Ta.txt"}
     file = fileDict[random.randint(1,2)]
-    
-    #open now selected file
     with open(file, 'r') as fileRead:
         fileContents = fileRead.read()
-    
-    #changes string of file contents into array
     listOfWords = fileContents.split("\n")
     
-    #creates empty string to become the chosen word
-    roundWord = ""
-    
-    #makes sure the chosen word is exactly 5 letters long
     roundWord = listOfWords[random.randint(0,(len(listOfWords)-1))]
     return roundWord
 
 def makeBoard(word):
     playBoard = [char for char in word]
-    emptyList= []
-    for i in range(len(playBoard)):
-        emptyList.append("_")
+    emptyList = ['_' for _ in playBoard]
     return emptyList
 
 def wordToDict(word):
-    listOfChars = word.split()
-    
     charIndexDict = {}
     
     for index, char in enumerate(word):
@@ -39,48 +25,68 @@ def wordToDict(word):
     
     return charIndexDict
     
-def contains(guess, actualDict): 
-    correctchars = []
+def contains(guess, actualWord): 
+    actualWord = wordToDict(actualWord)
     charsInRightSpot = []
     charsInWord = []
     
     for index , character in enumerate(guess):
-        if character in actualDict.values() and actualDict.get(index) == character:
+        if character in actualWord[index]:
             charsInRightSpot.append(character)
-        elif character in actualDict.values():
+        elif character in actualWord.values():
             charsInWord.append(character)
-    correctchars.append(charsInRightSpot)
-    correctchars.append(charsInWord)
     
-    return correctchars
+    return charsInRightSpot, charsInWord
+
+
+def updateBoard(charsInRightSpot, actualWord):
+    updatedBoard = []
+    for chars in actualWord:
+        if chars in charsInRightSpot:
+            updatedBoard.append(chars)
+        else:
+            updatedBoard.append("_")
+    return updatedBoard
+
+def charNotInTheRightSpot(charsInWord):
+    if charsInWord:
+        print("The following character are in the word, just not in the right place: ")
+        for char in charsInWord:
+            print(f"{char}, ", end="")
+        print()
         
+         
     
     
     
 
-def correct(guess, actual):
-    if guess == actual:
-        return "You're guess was right!"
-    if sorted(guess) == sorted(actual):
-        return "you have all the letters, just not in the right order"
-    else:
-        return "wrong"
+def isGuessCorrect(guess, actual):
+    return guess == actual
+   
 
 
-dict = wordToDict("apple")
-contains("alien", dict)
-##print(word1)
-#print(word2)
-#print(letterTracker(word1, word2))
-#print(correct(word1, word2))
-#print(similarLetters(word1, word2))
+if __name__ == "__main__":
+    roundWord = getWord()
+    print(makeBoard(roundWord))
+    guesses = []
+    flag = True
+    
+    while(flag):
+        playerGuess = input("The word is 5 letters. Guess a five letter word! ")
+        charsInRightSpot, charsInWord = contains(playerGuess, roundWord)
+        print(updateBoard(charsInRightSpot, roundWord))
+        charNotInTheRightSpot(charsInWord)
+        
+        if(isGuessCorrect(playerGuess, roundWord)):
+            print("You win!")
+            flag = False
+        
+        
+
+    
             
 
 
     
 
 
-#window = tk.Tk()
-#window.title("Hello World")
-
-##window.mainloop()
