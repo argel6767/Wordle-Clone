@@ -39,18 +39,20 @@ def contains(guess, actualWord):
     return charsInRightSpot, charsInWord
 
 
-def updateBoard(charsInRightSpot, actualWord):
+def updateBoard(charsInRightSpot, actualWord, previousBoard):
     updatedBoard = []
-    for chars in actualWord:
+    for index, chars in enumerate(actualWord):
         if chars in charsInRightSpot:
             updatedBoard.append(chars)
+        elif previousBoard[index] != "_":
+            updatedBoard.append(previousBoard[index]) 
         else:
             updatedBoard.append("_")
     return updatedBoard
 
 def charNotInTheRightSpot(charsInWord):
     if charsInWord:
-        print("The following character are in the word, just not in the right place: ")
+        print("The following character(s) are in the word, just not in the right place: ")
         for char in charsInWord:
             print(f"{char}, ", end="")
         print()
@@ -66,20 +68,29 @@ def isGuessCorrect(guess, actual):
 
 
 if __name__ == "__main__":
-    roundWord = getWord()
-    print(makeBoard(roundWord))
+    roundWord = "apple"
+    lastBoard = makeBoard(roundWord)
     guesses = []
     flag = True
     
+    
     while(flag):
         playerGuess = input("The word is 5 letters. Guess a five letter word! ")
+        if (len(playerGuess) != 5):
+            print("Not a valid guess, try again!")
+            continue
+        
         charsInRightSpot, charsInWord = contains(playerGuess, roundWord)
-        print(updateBoard(charsInRightSpot, roundWord))
+        currentBoard = updateBoard(charsInRightSpot, roundWord, lastBoard)
+        print(currentBoard)
+        
         charNotInTheRightSpot(charsInWord)
         
         if(isGuessCorrect(playerGuess, roundWord)):
             print("You win!")
             flag = False
+            
+        lastBoard = currentBoard
         
         
 
